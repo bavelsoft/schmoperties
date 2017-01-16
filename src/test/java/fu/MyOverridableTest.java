@@ -14,8 +14,6 @@ public class MyOverridableTest {
 		assertEquals("myDefaultValue", someField);
 	}
 
-
-
 	@OverridableValue("1.2")
 	private final double someOtherField = MyOverridableTestOverridableSupport.someOtherField_init();
 

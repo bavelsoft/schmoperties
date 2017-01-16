@@ -1,0 +1,34 @@
+# guice
+
+If you already have some modue:
+
+	class MyModule extends AbstractModule {
+		public void configure() {
+			bind(Something.class);
+		}
+	}
+
+Change it to:
+
+	class MyModule extends AbstractModule {
+		@ConfigurationModule("MyConfigModule")
+		public void configure() {
+			install(new GuiceMyConfigModule());
+			bind(Something.class);
+		}
+	}
+
+# dagger2
+
+If you already have some component:
+
+	@Component(modules=Whatever.class)
+	interface MyComponent {
+	}
+
+Change its annotations to:
+
+	@ConfigurationModule("MyConfigModule")
+	@Component(modules=Whatever.class, MyConfigModule.class)
+	interface MyComponent {
+	}

@@ -13,7 +13,7 @@ Change it to:
 	class MyModule extends AbstractModule {
 		@ConfigurationModule("MyConfigModule")
 		public void configure() {
-			install(new GuiceMyConfigModule());
+			install(new MyConfigModule());
 			bind(Something.class);
 		}
 	}

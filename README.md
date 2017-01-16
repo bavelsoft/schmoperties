@@ -36,7 +36,7 @@ Schmoperties is a java API designed to make configuration simple and easy to mai
 ## HOWTO
 
 The general approach is that many different units of code can all refer to a single @Named piece of configuration,
-but that only a single unit of code should ever refer directly to a single OverridableValueValue.
+but that only a single unit of code should ever refer directly to a single OverridableValue field.
 
 Sharing of an OverridableValue, if desired, should be done using java code, and not using the configuration framework.
 

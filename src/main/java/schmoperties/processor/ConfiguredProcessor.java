@@ -50,7 +50,12 @@ public class ConfiguredProcessor extends AbstractProcessor {
 	@Override
 	public boolean process(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
 		Map<String, Class<?>> fields = getFields(env);
-		for (Element element : env.getElementsAnnotatedWith(ConfigurationModule.class)) {
+		Set<Element> elements = env.getElementsAnnotatedWith(ConfigurationModule.class);
+		if (!fields.isEmpty() && elements.isEmpty())
+			messager.printMessage(Diagnostic.Kind.WARNING,
+					      "need @ConfiguredModule in the same compilation unit, e.g. maven module",
+					      env.getElementsAnnotatedWith(Configured.class).iterator().next());
+		for (Element element : elements) {
 			String configurationModule = element.getAnnotation(ConfigurationModule.class).value();
 			String packageName = elementUtils.getPackageOf(element).toString();;
 

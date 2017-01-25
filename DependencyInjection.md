@@ -1,3 +1,5 @@
+Every separately built jar that uses @Configured annotations must load its own dependency injection binding as described below.
+
 # guice
 
 If you already have some modue:

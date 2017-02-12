@@ -1,7 +1,7 @@
 # Schmoperties
-Schmoperties is a java API designed to make configuration simple and easy to maintain.
+Schmoperties is two java APIs designed to make configuration simple and easy to maintain.
 
-## General Benefits
+## Benefits of both APIs
 * Configuration of the right things
 * Viewing the configuration usable at compile time
 * Viewing the configuration used without having to run

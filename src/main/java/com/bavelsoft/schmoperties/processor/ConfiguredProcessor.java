@@ -1,4 +1,4 @@
-package schmoperties.processor;
+package com.bavelsoft.schmoperties.processor;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
@@ -22,11 +22,11 @@ import static java.util.stream.Collectors.toSet;
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
 import com.google.auto.service.AutoService;
 import javax.inject.Named;
-import schmoperties.TypeMapFactory;
-import schmoperties.generator.DaggerModuleGenerator;
-import schmoperties.generator.GuiceModuleGenerator;
-import schmoperties.annotation.ConfigurationModule;
-import schmoperties.annotation.Configured;
+import com.bavelsoft.schmoperties.TypeMapFactory;
+import com.bavelsoft.schmoperties.generator.DaggerModuleGenerator;
+import com.bavelsoft.schmoperties.generator.GuiceModuleGenerator;
+import com.bavelsoft.schmoperties.annotation.ConfigurationModule;
+import com.bavelsoft.schmoperties.annotation.Configured;
 
 
 @AutoService(Processor.class)
@@ -61,7 +61,7 @@ public class ConfiguredProcessor extends AbstractProcessor {
 
 			String fileName = "target/generated-sources/annotations/"
 				+ (packageName + "." + configurationModule).replaceAll("\\.","/");
-			System.err.println("schmoperties preparing to create module file "
+			System.err.println("com.bavelsoft.schmoperties preparing to create module file "
 				+ fileName
 				+ ": "
 				+ new java.io.File(fileName).exists()

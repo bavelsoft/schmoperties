@@ -1,7 +1,7 @@
 package fu;
 
 import org.junit.Test;
-import schmoperties.annotation.OverridableValue;
+import com.bavelsoft.schmoperties.annotation.OverridableValue;
 import static org.junit.Assert.assertEquals;
 
 public class MyOverridableTest {

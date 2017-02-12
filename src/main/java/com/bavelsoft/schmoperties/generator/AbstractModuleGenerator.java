@@ -1,4 +1,4 @@
-package schmoperties.generator;
+package com.bavelsoft.schmoperties.generator;
 
 import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.JavaFile;
@@ -13,9 +13,9 @@ import javax.lang.model.element.Modifier;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import java.util.Map;
-import schmoperties.storenonmeta.Store;
-import schmoperties.storenonmeta.StoreFactory;
-import schmoperties.TypeMapFactory;
+import com.bavelsoft.schmoperties.storenonmeta.Store;
+import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
+import com.bavelsoft.schmoperties.TypeMapFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ public abstract class AbstractModuleGenerator {
 		try {
 			final String fullyQualifiedName = packageName + '.' + configurationModule;
 			final JavaFileObject jfo = filer.createSourceFile(fullyQualifiedName);
-			System.err.println("schmoperties created module file "+jfo.toUri());
+			System.err.println("com.bavelsoft.schmoperties created module file "+jfo.toUri());
 
 			try (final Writer writer = jfo.openWriter() ) {
 				generate(writer, packageName, configurationModule, fields);

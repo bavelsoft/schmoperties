@@ -2,8 +2,8 @@ package fu;
 
 import org.junit.Test;
 import org.junit.Ignore;
-import schmoperties.annotation.Configured;
-import schmoperties.annotation.ConfigurationModule;
+import com.bavelsoft.schmoperties.annotation.Configured;
+import com.bavelsoft.schmoperties.annotation.ConfigurationModule;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;

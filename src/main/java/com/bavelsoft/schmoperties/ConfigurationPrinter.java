@@ -1,4 +1,4 @@
-package schmoperties;
+package com.bavelsoft.schmoperties;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Consumer;
-import schmoperties.annotation.Configured;
-import schmoperties.annotation.OverridableValue;
-import schmoperties.processor.ConfiguredProcessor;
-import schmoperties.processor.OverridableProcessor;
-import schmoperties.generator.OverridableSupportGenerator;
-import schmoperties.storenonmeta.Store;
-import schmoperties.storenonmeta.StoreFactory;
+import com.bavelsoft.schmoperties.annotation.Configured;
+import com.bavelsoft.schmoperties.annotation.OverridableValue;
+import com.bavelsoft.schmoperties.processor.ConfiguredProcessor;
+import com.bavelsoft.schmoperties.processor.OverridableProcessor;
+import com.bavelsoft.schmoperties.generator.OverridableSupportGenerator;
+import com.bavelsoft.schmoperties.storenonmeta.Store;
+import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
 import org.reflections.Reflections;
 import org.reflections.scanners.FieldAnnotationsScanner;
 

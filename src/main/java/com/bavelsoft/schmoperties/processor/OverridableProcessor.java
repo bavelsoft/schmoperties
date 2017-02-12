@@ -1,4 +1,4 @@
-package schmoperties.processor;
+package com.bavelsoft.schmoperties.processor;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
@@ -22,9 +22,9 @@ import java.util.Collections;
 import javax.tools.FileObject;
 import static javax.tools.StandardLocation.CLASS_OUTPUT;
 import com.google.auto.service.AutoService;
-import schmoperties.TypeMapFactory;
-import schmoperties.generator.OverridableSupportGenerator;
-import schmoperties.annotation.OverridableValue;
+import com.bavelsoft.schmoperties.TypeMapFactory;
+import com.bavelsoft.schmoperties.generator.OverridableSupportGenerator;
+import com.bavelsoft.schmoperties.annotation.OverridableValue;
 
 @AutoService(Processor.class)
 public class OverridableProcessor extends AbstractProcessor {

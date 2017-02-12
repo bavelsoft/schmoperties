@@ -1,4 +1,4 @@
-package schmoperties.storenonmeta;
+package com.bavelsoft.schmoperties.storenonmeta;
 
 import java.io.FileInputStream;
 import java.io.IOException;

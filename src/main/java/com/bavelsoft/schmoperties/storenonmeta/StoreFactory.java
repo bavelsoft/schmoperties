@@ -1,4 +1,4 @@
-package schmoperties.storenonmeta;
+package com.bavelsoft.schmoperties.storenonmeta;
 
 public class StoreFactory {
 	private static final Store store = create();

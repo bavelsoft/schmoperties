@@ -1,4 +1,4 @@
-package schmoperties.generator;
+package com.bavelsoft.schmoperties.generator;
 
 import com.squareup.javapoet.TypeSpec;
 import javax.annotation.processing.Filer;

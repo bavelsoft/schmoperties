@@ -1,4 +1,4 @@
-package schmoperties.storenonmeta;
+package com.bavelsoft.schmoperties.storenonmeta;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

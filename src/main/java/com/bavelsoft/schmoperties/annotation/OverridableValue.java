@@ -1,4 +1,4 @@
-package schmoperties.annotation;
+package com.bavelsoft.schmoperties.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package schmoperties;
+package com.bavelsoft.schmoperties;
 
 import java.util.Arrays;
 import java.util.Map;

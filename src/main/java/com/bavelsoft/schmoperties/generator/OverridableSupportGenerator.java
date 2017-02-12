@@ -1,4 +1,4 @@
-package schmoperties.generator;
+package com.bavelsoft.schmoperties.generator;
 
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.FieldSpec;
@@ -10,9 +10,9 @@ import javax.lang.model.element.Modifier;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import java.util.List;
-import schmoperties.storenonmeta.Store;
-import schmoperties.storenonmeta.StoreFactory;
-import schmoperties.TypeMapFactory;
+import com.bavelsoft.schmoperties.storenonmeta.Store;
+import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
+import com.bavelsoft.schmoperties.TypeMapFactory;
 
 public class OverridableSupportGenerator {
 	public static final String SUFFIX = "OverridableSupport";

@@ -15,7 +15,8 @@ import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
 import com.bavelsoft.schmoperties.TypeMapFactory;
 
 public class OverridableSupportGenerator {
-	public static final String SUFFIX = "OverridableSupport";
+	public static final String CLASS_SUFFIX = "OverridableSupport";
+	public static final String METHOD_SUFFIX = "_init";
 	private Filer filer;
 
 	public OverridableSupportGenerator(Filer filer) {
@@ -24,7 +25,7 @@ public class OverridableSupportGenerator {
 
 	public void write(String packageName, String className, List<String> fieldNames, List<Class<?>> fieldTypes, List<String> fieldDefaults) {
 		try {
-			final String fullyQualifiedClassName = packageName + '.' + className + SUFFIX;
+			final String fullyQualifiedClassName = packageName + '.' + className + CLASS_SUFFIX;
 			final JavaFileObject jfo = filer.createSourceFile(fullyQualifiedClassName);
 			try (final Writer writer = jfo.openWriter()) {
 				generate(writer, packageName, className, fieldNames, fieldTypes, fieldDefaults);
@@ -46,7 +47,7 @@ public class OverridableSupportGenerator {
 	}
 
 	private TypeSpec.Builder createClass(String className) {
-		TypeSpec.Builder cls = TypeSpec.classBuilder(className + SUFFIX)
+		TypeSpec.Builder cls = TypeSpec.classBuilder(className + CLASS_SUFFIX)
 			.addJavadoc("This class was automatically generated at build time\nby OverridableProcessor for the configuration of $L\n", className)
 			.addField(FieldSpec.builder(Store.class, "store")
                         	.addModifiers(Modifier.PRIVATE, Modifier.FINAL, Modifier.STATIC)
@@ -60,7 +61,7 @@ public class OverridableSupportGenerator {
 	private  MethodSpec.Builder createMethod(String fullyQualifiedClassName, String fieldName, Class<?> fieldType, String fieldDefault) {
 		String fullyQualifiedField = fullyQualifiedClassName + "." + fieldName;
 
-		MethodSpec.Builder method = MethodSpec.methodBuilder(fieldName+"_init")
+		MethodSpec.Builder method = MethodSpec.methodBuilder(fieldName+METHOD_SUFFIX)
 			.addJavadoc("This should only be called as the initializer for the $L field of $L\n", fieldName, fullyQualifiedClassName)
 			.addModifiers(Modifier.STATIC)
 			.addStatement("return store.get$L($S, $S)", TypeMapFactory.capitalized(fieldType), fullyQualifiedField, fieldDefault)

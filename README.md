@@ -47,8 +47,7 @@ then environment.conf can be in the hocon format. Otherwise it's just java prope
 
 The general approach is that many different units of code can all refer to a single @Named piece of configuration,
 but that only a single unit of code should ever refer directly to a single @OverridableValue field.
-
-Sharing of an OverridableValue should only be done using java code, and not using the configuration framework.
+Sharing of an @OverridableValue should only be done using java code, and not using the configuration framework.
 
 ### [Dependency injection of configuration requires loading generated wiring.](doc/DependencyInjection.md)
 

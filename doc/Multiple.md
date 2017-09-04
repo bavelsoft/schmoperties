@@ -1,6 +1,7 @@
 Multiple sets of configuration, for the same @Named key, can live in the same configuration file.
-Just put a system property in the @Named key,
-and the appropriate set of the configuration will be selected.
+Just put a variable reference to a system property in the @Named key,
+and schmoperties will expand the variable,
+and select the appropriate set of the configuration to inject.
 
 For example, with configuration:
 

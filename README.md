@@ -50,11 +50,11 @@ but that only a single unit of code should ever refer directly to a single @Over
 
 Sharing of an OverridableValue, if desired, should be done using java code, and not using the configuration framework.
 
+### [Dependency injection of configuration requires loading generated wiring.](doc/DependencyInjection.md)
+
+### [Different configurations can reside in a single configuration file.](doc/Multiple.md)
+
 ### Viewing configuration used
 
 Viewing configuration-to-be-used before start is done using the ConfigurationPrinter class,
 see the pom.xml file for ane example.
-
-### [Dependency injection of configuration involves loading generated wiring.](doc/DependencyInjection.md)
-
-### [Different configurations can reside in a single configuration file.](doc/Multiple.md)

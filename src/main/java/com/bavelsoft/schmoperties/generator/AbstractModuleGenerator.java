@@ -73,7 +73,7 @@ public abstract class AbstractModuleGenerator {
 	protected abstract Class<?> getMethodAnnotation();
 
 	private  MethodSpec.Builder createMethod(String name, Class<?> type) {
-		String shortName = name.replaceAll("\\.","_");
+		String shortName = name.replaceAll("[\\.\\$\\{}]","_");
 		MethodSpec.Builder method = MethodSpec.methodBuilder(shortName)
 			.addAnnotation(getMethodAnnotation())
 			.addAnnotation(Singleton.class)

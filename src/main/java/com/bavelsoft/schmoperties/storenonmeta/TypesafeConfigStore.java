@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import static org.apache.commons.lang3.text.StrSubstitutor.replaceSystemProperties;
 
 public class TypesafeConfigStore implements Store {
 	private Config config;
@@ -23,6 +24,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public boolean getBoolean(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getBoolean(key);
 		else if (defaultValue != null)
@@ -32,6 +34,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public double getDouble(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getDouble(key);
 		else if (defaultValue != null)
@@ -41,6 +44,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public double getFloat(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getDouble(key);
 		else if (defaultValue != null)
@@ -50,6 +54,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public long getLong(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getLong(key);
 		else if (defaultValue != null)
@@ -59,6 +64,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public int getInt(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getInt(key);
 		else if (defaultValue != null)
@@ -68,6 +74,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public int getShort(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getInt(key);
 		else if (defaultValue != null)
@@ -77,6 +84,7 @@ public class TypesafeConfigStore implements Store {
 	}
 
 	public String getString(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		if (config.hasPath(key))
 			return config.getString(key);
 		else if (defaultValue != null)

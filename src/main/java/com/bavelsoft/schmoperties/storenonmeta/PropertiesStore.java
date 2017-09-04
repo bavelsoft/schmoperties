@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Properties;
+import static org.apache.commons.lang3.text.StrSubstitutor.replaceSystemProperties;
 
 public class PropertiesStore implements Store {
 	private Properties properties;
@@ -29,6 +30,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public boolean getBoolean(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -37,6 +39,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public double getDouble(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -45,6 +48,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public double getFloat(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -53,6 +57,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public long getLong(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -61,6 +66,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public int getInt(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -69,6 +75,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public int getShort(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);
@@ -77,6 +84,7 @@ public class PropertiesStore implements Store {
 	}
 
 	public String getString(String key, String defaultValue) {
+		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (stringValue == null)
 			throw Store.requiredAndAbsent(key);

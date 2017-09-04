@@ -15,6 +15,7 @@ public class MyGuiceTest {
 
 	static class WiredClass {
 		@Inject @Configured @Named("fubar") String fuBar;
+		@Inject @Configured @Named("${var}bar") String varBar;
 		@Inject @Configured @Named("Qux") int qux;
 
 		@Inject
@@ -32,6 +33,13 @@ public class MyGuiceTest {
 	public void testWiredField() {
 		WiredClass w = Guice.createInjector(new MyModule()).getInstance(WiredClass.class);
 		assertEquals("baz", w.fuBar);
+	}
+
+	@Test
+	public void testVarField() {
+		System.getProperties().setProperty("var","fu");
+		WiredClass w = Guice.createInjector(new MyModule()).getInstance(WiredClass.class);
+		assertEquals("baz", w.varBar);
 	}
 
 	@Test

@@ -44,5 +44,20 @@ Sharing of an OverridableValue, if desired, should be done using java code, and 
 
 [Dependency injection of configuration involves loading generated wiring.](DependencyInjection.md)
 
-Viewing configuration-to-be-used before start is done using ConfigurationPrinter.
+Viewing configuration-to-be-used before start is done using the ConfigurationPrinter class,
+see the pom.xml file for ane example.
 
+Multiple sets of configuration, for the same @Named key, can live in the same configuration file.
+Just put a system property in the @Named key,
+and the appropriate set of the configuration will be selected.
+
+For example, with configuration:
+	1.hostName=fu
+	2.hostName=bar
+
+If your program is executed with:
+	java -Dshard=2
+
+Then the variable:
+	@Named("${shard}.hostName") @Configured @Inject String hostname;
+will be injected with the value "bar".

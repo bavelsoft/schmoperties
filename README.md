@@ -32,6 +32,14 @@ The myFuField will be assigned the value 1.2 by default,
 but if somebody specifies a different value for MyExampleClass.myFuField in the configuration file,
 it will be used instead.
 
+This API is to be used in place of regular compile time constants.
+It allows those "constants" to be overridable at run time, without a rebuilding or redeploying.
+Except for a dollop of complexity, it keeps all of the advantages of regular constants.
+Since this kind of configuration is not meant to provide a first class user interface,
+and creates a coupling to the source code,
+it should only be used for short periods,
+e.g. until the next release of the application.
+
 ## HOWTO
 
 By default the configuration file is environment.conf. If "typesafe config" is present on the classpath,

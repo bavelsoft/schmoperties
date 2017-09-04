@@ -13,7 +13,7 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 	@Configured @Inject @Named("MyFuBarField")
 	private double myBarField;
 
-The myBarField field will be injected just like with regular dependency injection,
+The myBarField field will be injected just as with regular dependency injection,
 except that its value is coming from the configuration file,
 and not from a dependency provider in code. Currently Guice and Dagger2 are supported.
 
@@ -32,8 +32,8 @@ The myFuField will be assigned the value 1.2 by default,
 but if somebody specifies a different value for MyExampleClass.myFuField in the configuration file,
 it will be used instead.
 
-This API is to be used in place of regular compile time constants.
-It allows those "constants" to be overridable at run time, without a rebuilding or redeploying.
+This API is designed to be used in place of regular compile time constants.
+It allows those "constants" to be overridable at run time, without rebuilding or redeploying.
 Except for a dollop of complexity, it keeps all of the advantages of regular constants.
 Since this kind of configuration is not meant to provide a first class user interface,
 and creates a coupling to the source code,

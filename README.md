@@ -13,7 +13,7 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 	@Configured @Inject @Named("MyFuBarField")
 	private double myBarField;
 
-The myBarField field will be injected just as with regular dependency injection,
+The myBarField field will be injected just like with regular dependency injection,
 except that its value comes from the configuration file,
 and not from a dependency provider in code. Currently Guice and Dagger2 are supported.
 
@@ -34,7 +34,7 @@ it will be used instead.
 
 This API is designed to be used in place of regular compile time constants.
 It allows those "constants" to be overridable at run time, without rebuilding or redeploying.
-Except for a dollop of complexity, it keeps all of the advantages of regular constants.
+Except for an extra dollop of complexity, it has all of the advantages of regular constants.
 Since this kind of configuration is not meant to provide a first class user interface,
 and creates a coupling to the source code,
 it should only be used for short periods,
@@ -48,7 +48,7 @@ then environment.conf can be in the hocon format. Otherwise it's just java prope
 The general approach is that many different units of code can all refer to a single @Named piece of configuration,
 but that only a single unit of code should ever refer directly to a single @OverridableValue field.
 
-Sharing of an OverridableValue, if desired, should be done using java code, and not using the configuration framework.
+Sharing of an OverridableValue should only be done using java code, and not using the configuration framework.
 
 ### [Dependency injection of configuration requires loading generated wiring.](doc/DependencyInjection.md)
 

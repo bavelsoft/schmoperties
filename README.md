@@ -14,7 +14,7 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 	private double myBarField;
 
 The myBarField field will be injected just as with regular dependency injection,
-except that its value is coming from the configuration file,
+except that its value comes from the configuration file,
 and not from a dependency provider in code. Currently Guice and Dagger2 are supported.
 
 ## Fields that generally don't change in each environment

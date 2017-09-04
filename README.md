@@ -38,7 +38,7 @@ By default the configuration file is environment.conf. If "typesafe config" is p
 then environment.conf can be in the hocon format. Otherwise it's just java properties.
 
 The general approach is that many different units of code can all refer to a single @Named piece of configuration,
-but that only a single unit of code should ever refer directly to a single OverridableValue field.
+but that only a single unit of code should ever refer directly to a single @OverridableValue field.
 
 Sharing of an OverridableValue, if desired, should be done using java code, and not using the configuration framework.
 

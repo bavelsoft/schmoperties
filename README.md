@@ -49,6 +49,6 @@ Sharing of an OverridableValue, if desired, should be done using java code, and 
 Viewing configuration-to-be-used before start is done using the ConfigurationPrinter class,
 see the pom.xml file for ane example.
 
-### [Different configurations can reside in a single configuration file.](doc/Mutiple.md)
+### [Different configurations can reside in a single configuration file.](doc/Multiple.md)
 
 

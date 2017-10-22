@@ -35,9 +35,8 @@ it will be used instead.
 This API is designed to be used in place of regular compile time constants.
 It allows those "constants" to be overridable at run time, without rebuilding or redeploying.
 Except for an extra dollop of complexity, it has all of the advantages of regular constants.
-Since this kind of configuration is not meant to provide a first class user interface,
-and creates a coupling to the source code,
-it should only be used for short periods,
+Since this kind of configuration creates a tight coupling to the source code,
+it should only be overridden for short periods of time,
 e.g. until the next release of the application.
 
 ## HOWTO

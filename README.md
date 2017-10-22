@@ -55,4 +55,4 @@ Sharing of an @OverridableValue should only be done using java code, and not usi
 ### Viewing configuration used
 
 Viewing configuration-to-be-used before start is done using the ConfigurationPrinter class,
-see the pom.xml file for ane example.
+see the pom.xml file for an example.

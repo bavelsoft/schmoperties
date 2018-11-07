@@ -30,6 +30,7 @@ See the link below for instructions to load the generated bindings.
 This is for fields that generally don't change in each environment.
 
 	package mypackage;
+	...
 	
 	class MyExampleClass {
 		...

@@ -1,5 +1,6 @@
 # Schmoperties
-Schmoperties is two java APIs designed to make configuration simple and easy to maintain.
+Schmoperties is two java APIs designed to make configuration simple and easy to maintain:
+Per Environment and Overridable Constants.
 
 ## Benefits
 * Viewing the configuration usable at compile time
@@ -8,7 +9,10 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 * Natural unit testing
 * No extra dependencies
 
-## Fields that are configured in each environment
+## Per Environment
+
+This is for fields that are explicitly configured for each environment.
+
 ### Example
 	@Named("MyFuBarField") @Inject @Configured
 	private double myBarField;
@@ -17,12 +21,15 @@ The myBarField field will be injected just like with regular dependency injectio
 except that its value comes from the configuration file,
 and not from a dependency provider in code.
 `@Named` and `@Inject` are the standard dependency injection annotations from JSR 330,
-and `@Configured` just causes schmoperties to generat vanilla binding code for the named injection.
+and `@Configured` just causes schmoperties to generate vanilla binding code for the named injection.
 
 Currently Guice and Dagger2 are supported.
 See the link below for instructions to load the generated bindings.
 
-## Fields that generally don't change in each environment
+## Overridables Constants
+
+This is for fields that generally don't change in each environment.
+
 ### Example
 	class MyExampleClass {
 		...
@@ -36,9 +43,11 @@ See the link below for instructions to load the generated bindings.
 The myFuField will be assigned the value 1.2 by default,
 but if somebody specifies a different value for MyExampleClass.myFuField in the configuration file,
 it will be used instead.
-`getDouble()` is the schmoperties call, and it accepts a generated enum value for the field name, in this case `myFuField`.
+`getDouble()` is the schmoperties call,
+and it accepts a generated enum value for the field name,
+in this case `myFuField`.
 This little boilerplate enables avoiding magic other than build-time code generation,
-and even allows the overridable variables to be "final".
+and even enables the overridable variables to be java "final".
 
 This API is designed to be used in place of regular compile time constants.
 It allows those "constants" to be overridable at run time, without rebuilding or redeploying.

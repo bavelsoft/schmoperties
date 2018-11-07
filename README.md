@@ -43,9 +43,9 @@ This is for fields that generally don't change in each environment.
 The `myFuField` will be assigned the value 1.2 by default,
 but if somebody specifies a different value for `mypackage.MyExampleClass.myFuField` in the configuration file,
 it will be used instead.
-`getDouble()` is the schmoperties call,
+`getDouble()` is the statically imported schmoperties call,
 and it accepts a generated enum value for the field name,
-in this case `myFuField`.
+in this case that statically imported `myFuField`.
 This little boilerplate enables avoiding magic other than build-time code generation,
 and even enables the overridable variables to be java "final".
 

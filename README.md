@@ -13,12 +13,11 @@ Per Environment and Overridable Constants.
 
 This is for fields that are explicitly configured for each environment.
 
-### Example
-	@Named("MyFuBarField") @Inject @Configured
+	@Named("MyFooBarField") @Inject @Configured
 	private double myBarField;
 
-The myBarField field will be injected just like with regular dependency injection,
-except that its value comes from the configuration file,
+The `myBarField` field will be injected just like with regular dependency injection,
+except that its value comes from the `myFooBarField` entry in the configuration file,
 and not from a dependency provider in code.
 `@Named` and `@Inject` are the standard dependency injection annotations from JSR 330,
 and `@Configured` just causes schmoperties to generate vanilla binding code for the named injection.
@@ -30,7 +29,8 @@ See the link below for instructions to load the generated bindings.
 
 This is for fields that generally don't change in each environment.
 
-### Example
+	package mypackage;
+	
 	class MyExampleClass {
 		...
 	
@@ -40,8 +40,8 @@ This is for fields that generally don't change in each environment.
 		...
 	}
 
-The myFuField will be assigned the value 1.2 by default,
-but if somebody specifies a different value for MyExampleClass.myFuField in the configuration file,
+The `myFuField` will be assigned the value 1.2 by default,
+but if somebody specifies a different value for `mypackage.MyExampleClass.myFuField` in the configuration file,
 it will be used instead.
 `getDouble()` is the schmoperties call,
 and it accepts a generated enum value for the field name,

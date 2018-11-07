@@ -26,7 +26,7 @@ and `@Configured` just causes schmoperties to generate vanilla binding code for 
 Currently Guice and Dagger2 are supported.
 See the link below for instructions to load the generated bindings.
 
-## Overridables Constants
+## Overridable Constants
 
 This is for fields that generally don't change in each environment.
 

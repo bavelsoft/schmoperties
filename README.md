@@ -18,7 +18,7 @@ This is for fields that are explicitly configured for each environment.
 
 The `myBarField` field will be injected just like with regular dependency injection,
 except that its value comes from the `myFooBarField` entry in the configuration file,
-and not from a dependency provider in code.
+and not from a dependency provider in your code.
 `@Named` and `@Inject` are the standard dependency injection annotations from JSR 330,
 and `@Configured` just causes schmoperties to generate vanilla binding code for the named injection.
 

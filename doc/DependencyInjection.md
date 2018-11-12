@@ -28,7 +28,7 @@ If you already have some component:
 	interface MyComponent {
 	}
 
-Change its annotations to:
+Change it to:
 
 	@ConfigurationModule("MyConfigModule")
 	@Component(modules=Whatever.class, MyConfigModule.class)

@@ -3,8 +3,8 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 Per Environment and Overridable Constants.
 
 ## Benefits
-* Viewing the configuration usable at compile time
-* Viewing the configuration used without having to run
+* Ability to view what is configurable in your code, at compile time
+* Ability to view how your code is configured, without having to execute it
 * Natural dependency injection
 * Natural unit testing
 * No extra dependencies

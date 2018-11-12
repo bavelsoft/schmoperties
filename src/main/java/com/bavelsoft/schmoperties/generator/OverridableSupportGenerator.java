@@ -16,7 +16,6 @@ import com.bavelsoft.schmoperties.TypeMapFactory;
 
 public class OverridableSupportGenerator {
 	public static final String CLASS_SUFFIX = "OverridableSupport";
-	public static final String METHOD_SUFFIX = "_init";
 	private Filer filer;
 
 	public OverridableSupportGenerator(Filer filer) {
@@ -61,7 +60,7 @@ public class OverridableSupportGenerator {
 	private  MethodSpec.Builder createMethod(String fullyQualifiedClassName, String fieldName, Class<?> fieldType, String fieldDefault) {
 		String fullyQualifiedField = fullyQualifiedClassName + "." + fieldName;
 
-		MethodSpec.Builder method = MethodSpec.methodBuilder(fieldName+METHOD_SUFFIX)
+		MethodSpec.Builder method = MethodSpec.methodBuilder(fieldName)
 			.addJavadoc("This should only be called as the initializer for the $L field of $L\n", fieldName, fullyQualifiedClassName)
 			.addModifiers(Modifier.STATIC)
 			.addStatement("return store.get$L($S, $S)", TypeMapFactory.capitalized(fieldType), fullyQualifiedField, fieldDefault)

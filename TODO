@@ -1,3 +1,2 @@
-document reflection interface to overridablevalue, and validate a little more when processing
-defaults in code for @Configured
-hk2 support
+rename a configuration and warn if config file uses old name
+hk2

@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import static org.junit.Assert.assertEquals;
 import com.bavelsoft.schmoperties.annotation.Configured;
 import com.bavelsoft.schmoperties.annotation.ConfigurationModule;
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -17,6 +18,7 @@ public class MyGuiceTest {
 		@Inject @Configured @Named("fubar") String fuBar;
 		@Inject @Configured @Named("${var}bar") String varBar;
 		@Inject @Configured @Named("Qux") int qux;
+		@Nullable @Inject @Configured @Named("Quux") Double quux;
 
 		@Inject
 		WiredClass() {}

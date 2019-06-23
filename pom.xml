@@ -6,10 +6,25 @@
 	<version>1.0.17</version>
 	<build>
 		<plugins>
+<!--
+    <plugin>
+      <groupId>org.bsc.maven</groupId>
+      <artifactId>maven-processor-plugin</artifactId>
+      <executions>
+        <execution>
+          <id>process-test</id>
+          <goals>
+            <goal>process-test</goal>
+          </goals>
+          <phase>generate-test-sources</phase>
+        </execution>
+      </executions>
+    </plugin>
+-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.8.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>com.google.dagger</groupId>
@@ -21,6 +36,15 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<forceJavacCompilerUse>true</forceJavacCompilerUse>
+<!--
+        <compilerArgument>-proc:none</compilerArgument>
+-->
+					<compilerArgs>
+						<arg>-verbose</arg>
+						<arg>-Xprefer:source</arg>
+						<arg>-XprintProcessorInfo</arg>
+						<arg>-XprintRounds</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>

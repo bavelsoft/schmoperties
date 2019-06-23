@@ -30,13 +30,15 @@ public class TypesafeConfigStore implements Store {
 		return keys;
 	}
 
-	public boolean getBoolean(String key, String defaultValue) {
+	public Boolean getBoolean(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		boolean value;
+		Boolean value;
 		if (config.hasPath(key))
 			value = config.getBoolean(key);
 		else if (defaultValue != null)
 			value = Boolean.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -44,13 +46,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public double getDouble(String key, String defaultValue) {
+	public Double getDouble(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		double value;
+		Double value;
 		if (config.hasPath(key))
 			value = config.getDouble(key);
 		else if (defaultValue != null)
 			value = Double.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -58,13 +62,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public double getFloat(String key, String defaultValue) {
+	public Double getFloat(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		double value;
+		Double value;
 		if (config.hasPath(key))
 			value = config.getDouble(key);
 		else if (defaultValue != null)
 			value = Double.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -72,13 +78,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public long getLong(String key, String defaultValue) {
+	public Long getLong(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		long value;
+		Long value;
 		if (config.hasPath(key))
 			value = config.getLong(key);
 		else if (defaultValue != null)
 			value = Long.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -86,13 +94,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public int getInt(String key, String defaultValue) {
+	public Integer getInt(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		int value;
+		Integer value;
 		if (config.hasPath(key))
 			value = config.getInt(key);
 		else if (defaultValue != null)
 			value = Integer.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -100,13 +110,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public int getShort(String key, String defaultValue) {
+	public Integer getShort(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		int value;
+		Integer value;
 		if (config.hasPath(key))
 			value = config.getInt(key);
 		else if (defaultValue != null)
 			value = Integer.valueOf(defaultValue);
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
@@ -114,13 +126,15 @@ public class TypesafeConfigStore implements Store {
 		return value;
 	}
 
-	public String getString(String key, String defaultValue) {
+	public String getString(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String value;
 		if (config.hasPath(key))
 			value = config.getString(key);
 		else if (defaultValue != null)
 			value = defaultValue;
+		else if (isOptional)
+			value = null;
 		else
 			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))

@@ -3,6 +3,7 @@ Schmoperties is two java APIs designed to make configuration simple and easy to 
 Per Environment and Overridable Constants.
 
 ## Benefits
+* Keep your configuration file small
 * Ability to view what is configurable in your code, at compile time
 * Ability to view how your code is configured, without having to execute it
 * Natural dependency injection
@@ -57,12 +58,12 @@ e.g. until the next release of the application.
 
 ## HOWTO
 
-By default the configuration file is environment.conf. If "typesafe config" is present on the classpath,
+By default the configuration file is environment.conf. If [Typesafe Config](https://github.com/lightbend/config) is present on the classpath,
 then environment.conf can be in the hocon format. Otherwise it's just java properties.
 
 The general approach is that many different units of code can all refer to a single @Named piece of configuration,
 but that only a single unit of code should ever refer directly to a single @OverridableValue field.
-Sharing of an @OverridableValue should only be done using java code, and not using the configuration framework.
+Sharing of an @OverridableValue should only be done using java code, and not using multiple calls to the same generated method.
 
 ### [Dependency injection of configuration requires loading generated wiring.](doc/DependencyInjection.md)
 

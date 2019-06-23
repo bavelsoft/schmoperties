@@ -13,6 +13,7 @@ import javax.lang.model.element.Modifier;
 import javax.annotation.processing.Filer;
 import javax.tools.JavaFileObject;
 import java.util.Map;
+import java.util.Set;
 import com.bavelsoft.schmoperties.storenonmeta.Store;
 import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
 import com.bavelsoft.schmoperties.TypeMapFactory;
@@ -28,14 +29,14 @@ public abstract class AbstractModuleGenerator {
 		this.filer = filer;
 	}
 
-	public void write(String packageName, String configurationModule, Map<String, Class<?>> fields) {
+	public void write(String packageName, String configurationModule, Map<String, Class<?>> fields, Set<String> optionalFields) {
 		try {
 			final String fullyQualifiedName = packageName + '.' + configurationModule;
 			final JavaFileObject jfo = filer.createSourceFile(fullyQualifiedName);
 			System.err.println("com.bavelsoft.schmoperties created module file "+jfo.toUri());
 
 			try (final Writer writer = jfo.openWriter() ) {
-				generate(writer, packageName, configurationModule, fields);
+				generate(writer, packageName, configurationModule, fields, optionalFields);
 			}
 		} catch (ClassNotFoundException e) {
 			;
@@ -44,11 +45,13 @@ public abstract class AbstractModuleGenerator {
 		}
 	}
 
-	private void generate(Writer writer, String packageName, String configurationModule, Map<String, Class<?>> fields) throws IOException, ClassNotFoundException {
+	private void generate(Writer writer, String packageName, String configurationModule, Map<String, Class<?>> fields, Set<String> optionalFields)
+			throws IOException, ClassNotFoundException {
 		TypeSpec.Builder cls = createClass(configurationModule);
 
-		for (String field : fields.keySet())
-			cls.addMethod(createMethod(field, fields.get(field)).build());
+		for (String field : fields.keySet()) {
+			cls.addMethod(createMethod(field, fields.get(field), optionalFields.contains(field)).build());
+		}
 		JavaFile javaFile = JavaFile.builder(packageName, cls.build()).build();
 		javaFile.writeTo(writer);
 		return;
@@ -72,13 +75,13 @@ public abstract class AbstractModuleGenerator {
 
 	protected abstract Class<?> getMethodAnnotation();
 
-	private  MethodSpec.Builder createMethod(String name, Class<?> type) {
+	private  MethodSpec.Builder createMethod(String name, Class<?> type, boolean isOptional) {
 		String shortName = name.replaceAll("[\\.\\$\\{}]","_");
 		MethodSpec.Builder method = MethodSpec.methodBuilder(shortName)
 			.addAnnotation(getMethodAnnotation())
 			.addAnnotation(Singleton.class)
 			.addAnnotation(AnnotationSpec.builder(Named.class).addMember("value","$S",name).build())
-			.addStatement("return store.get$L($S, null)", TypeMapFactory.capitalized(type), name)
+			.addStatement("return store.get$L($S, null, $L)", TypeMapFactory.capitalized(type), name, isOptional)
 			.returns(type);
 		return method;
 

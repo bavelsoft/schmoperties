@@ -43,7 +43,7 @@ public class ConfigurationPrinter {
 			}
 		}
 		for (String f : usedConfigurationFields) {
-			usedConfiguration.add(f + ": " + store.getString(f, null));
+			usedConfiguration.add(f + ": " + store.getString(f, null, true));
 		}
 		
 	}

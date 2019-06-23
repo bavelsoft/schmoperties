@@ -8,12 +8,14 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.tools.Diagnostic;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.util.Elements;
+import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import java.io.Writer;
 import java.io.IOException;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
@@ -50,6 +52,7 @@ public class ConfiguredProcessor extends AbstractProcessor {
 	@Override
 	public boolean process(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
 		Map<String, Class<?>> fields = getFields(env);
+		Set<String> optionalFields = getOptionalFields(env);
 		Set<? extends Element> elements = env.getElementsAnnotatedWith(ConfigurationModule.class);
 		if (!fields.isEmpty() && elements.isEmpty())
 			messager.printMessage(Diagnostic.Kind.WARNING,
@@ -73,9 +76,9 @@ public class ConfiguredProcessor extends AbstractProcessor {
 				+ Thread.currentThread().getId());
 
 			if (element instanceof ExecutableElement || ((TypeElement)element).getSuperclass().toString().equals("com.google.inject.AbstractModule"))
-				guiceGenerator.write(packageName, configurationModule, fields);
+				guiceGenerator.write(packageName, configurationModule, fields, optionalFields);
 			else
-				daggerGenerator.write(packageName, configurationModule, fields);
+				daggerGenerator.write(packageName, configurationModule, fields, optionalFields);
 		}
 		return false;
 	}
@@ -89,6 +92,18 @@ public class ConfiguredProcessor extends AbstractProcessor {
 			}
 			String name = element.getAnnotation(Named.class).value();
 			fields.put(name, typeMap.get(element.asType().toString()));
+		}
+		return fields;
+	}
+
+	private Set<String> getOptionalFields(RoundEnvironment env) {
+		Set<String> fields = new HashSet<>();
+		for (Element element : env.getElementsAnnotatedWith(Configured.class)) {
+			for (AnnotationMirror mirror : element.getAnnotationMirrors()) {
+				if (mirror.getAnnotationType().asElement().getSimpleName().contentEquals("Nullable")) {
+					fields.add(element.getAnnotation(Named.class).value());
+				}
+			}
 		}
 		return fields;
 	}

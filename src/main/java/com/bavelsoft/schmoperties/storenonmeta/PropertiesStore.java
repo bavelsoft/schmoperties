@@ -36,78 +36,90 @@ public class PropertiesStore implements Store {
 		return keys;
 	}
 
-	public boolean getBoolean(String key, String defaultValue) {
+	public Boolean getBoolean(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Boolean.valueOf(stringValue);
 	}
 
-	public double getDouble(String key, String defaultValue) {
+	public Double getDouble(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Double.valueOf(stringValue);
 	}
 
-	public double getFloat(String key, String defaultValue) {
+	public Double getFloat(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Double.valueOf(stringValue);
 	}
 
-	public long getLong(String key, String defaultValue) {
+	public Long getLong(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Long.valueOf(stringValue);
 	}
 
-	public int getInt(String key, String defaultValue) {
+	public Integer getInt(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Integer.valueOf(stringValue);
 	}
 
-	public int getShort(String key, String defaultValue) {
+	public Integer getShort(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
+		else if (stringValue == null)
+			return null;
 		else
 			return Integer.valueOf(stringValue);
 	}
 
-	public String getString(String key, String defaultValue) {
+	public String getString(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
 		String stringValue = properties.getProperty(key, defaultValue);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, stringValue);
-		if (stringValue == null)
+		if (stringValue == null && !isOptional)
 			throw Store.requiredAndAbsent(key);
 		else
 			return properties.getProperty(stringValue);

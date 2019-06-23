@@ -63,7 +63,7 @@ public class OverridableSupportGenerator {
 		MethodSpec.Builder method = MethodSpec.methodBuilder(fieldName)
 			.addJavadoc("This should only be called as the initializer for the $L field of $L\n", fieldName, fullyQualifiedClassName)
 			.addModifiers(Modifier.STATIC)
-			.addStatement("return store.get$L($S, $S)", TypeMapFactory.capitalized(fieldType), fullyQualifiedField, fieldDefault)
+			.addStatement("return store.get$L($S, $S, true)", TypeMapFactory.capitalized(fieldType), fullyQualifiedField, fieldDefault)
 			.returns(fieldType);
 
 		return method;

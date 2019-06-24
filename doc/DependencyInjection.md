@@ -34,3 +34,11 @@ Change it to:
 	@Component(modules=Whatever.class, MyConfigModule.class)
 	interface MyComponent {
 	}
+
+Configuration of injected fields is required by default. If you want configuration of a field to be optional, you must annotate it as @Nullable.
+
+	@Nullable @Configured @Named(“foo”) @Inject foo;
+
+It doesn’t matter which package the annotation is from (e.g. javax.annotation.Nullable).
+
+Currently, only @Named is supported, and not custom annotations.

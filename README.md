@@ -32,7 +32,7 @@ This is for fields that generally don't change in each environment.
 
 	package mypackage;
 
-	import static mypackage.MyExampleClass.*;
+	import static mypackage.MyExampleClassOverridableSupport.*;
 	...
 	
 	class MyExampleClass {

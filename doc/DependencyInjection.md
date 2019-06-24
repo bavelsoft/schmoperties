@@ -2,7 +2,7 @@ Configuration of injected fields is required by default. If you want configurati
 
 	@Nullable @Configured @Named(“foo”) @Inject String foo;
 
-It doesn’t matter which package the annotation is from (e.g. javax.annotation.Nullable). That means you’d need to use primitive wrapper types instead of primitives (e.g. Double instead of double).
+It doesn’t matter which package the annotation is from (e.g. javax.annotation.Nullable). Using @Nullable means you’d need to use primitive wrapper types instead of primitives (e.g. Double instead of double).
 
 Currently, only @Named is supported, and not custom annotations.
 

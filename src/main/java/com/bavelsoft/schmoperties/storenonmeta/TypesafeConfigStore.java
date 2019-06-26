@@ -19,7 +19,7 @@ public class TypesafeConfigStore implements Store {
 	final Logger log = LoggerFactory.getLogger(PropertiesStore.class);
 
 	public TypesafeConfigStore(String configFile) {
-		config = ConfigFactory.parseFile(new File(configFile));
+		config = ConfigFactory.parseFile(new File(configFile)).resolve();
 	}
 
 	public Collection<String> getKeys() {

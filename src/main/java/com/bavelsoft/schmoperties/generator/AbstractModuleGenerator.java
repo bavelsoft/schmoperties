@@ -17,12 +17,8 @@ import java.util.Set;
 import com.bavelsoft.schmoperties.storenonmeta.Store;
 import com.bavelsoft.schmoperties.storenonmeta.StoreFactory;
 import com.bavelsoft.schmoperties.TypeMapFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractModuleGenerator {
-	//Logger logger = LoggerFactory.getLogger(ConfigurationPrinter.class); //TODO in the generated code
-	
 	private Filer filer;
 
 	public AbstractModuleGenerator(Filer filer) {
@@ -33,14 +29,11 @@ public abstract class AbstractModuleGenerator {
 		try {
 			final String fullyQualifiedName = packageName + '.' + configurationModule;
 			final JavaFileObject jfo = filer.createSourceFile(fullyQualifiedName);
-			System.err.println("com.bavelsoft.schmoperties created module file "+jfo.toUri());
 
 			try (final Writer writer = jfo.openWriter() ) {
 				generate(writer, packageName, configurationModule, fields, optionalFields);
 			}
-		} catch (ClassNotFoundException e) {
-			;
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.text.StrSubstitutor.replaceSystemProperti
 public class TypesafeConfigStore implements Store {
 	private Config config;
 	private Set<String> logged = new HashSet<>();
-	final Logger log = LoggerFactory.getLogger(PropertiesStore.class);
+	private Logger log = LoggerFactory.getLogger(PropertiesStore.class);
 
 	public TypesafeConfigStore(String configFile) {
 		config = ConfigFactory.parseFile(new File(configFile)).resolve();
@@ -32,113 +32,99 @@ public class TypesafeConfigStore implements Store {
 
 	public Boolean getBoolean(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Boolean value;
+		Boolean value = null;
 		if (config.hasPath(key))
 			value = config.getBoolean(key);
 		else if (defaultValue != null)
 			value = Boolean.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public Double getDouble(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Double value;
+		Double value = null;
 		if (config.hasPath(key))
 			value = config.getDouble(key);
 		else if (defaultValue != null)
 			value = Double.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public Double getFloat(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Double value;
+		Double value = null;
 		if (config.hasPath(key))
 			value = config.getDouble(key);
 		else if (defaultValue != null)
 			value = Double.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public Long getLong(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Long value;
+		Long value = null;
 		if (config.hasPath(key))
 			value = config.getLong(key);
 		else if (defaultValue != null)
 			value = Long.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public Integer getInt(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Integer value;
+		Integer value = null;
 		if (config.hasPath(key))
 			value = config.getInt(key);
 		else if (defaultValue != null)
 			value = Integer.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public Integer getShort(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		Integer value;
+		Integer value = null;
 		if (config.hasPath(key))
 			value = config.getInt(key);
 		else if (defaultValue != null)
 			value = Integer.valueOf(defaultValue);
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 
 	public String getString(String key, String defaultValue, boolean isOptional) {
 		key = replaceSystemProperties(key);
-		String value;
+		String value = null;
 		if (config.hasPath(key))
 			value = config.getString(key);
 		else if (defaultValue != null)
 			value = defaultValue;
-		else if (isOptional)
-			value = null;
-		else
-			throw Store.requiredAndAbsent(key);
 		if (logged.add(key))
 			log.info("{} is configured to have value {}", key, value);
+		if (!config.hasPath(key) && !isOptional)
+			throw Store.requiredAndAbsent(key);
 		return value;
 	}
 }

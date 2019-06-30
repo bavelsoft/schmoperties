@@ -16,7 +16,7 @@ import static org.apache.commons.lang3.text.StrSubstitutor.replaceSystemProperti
 public class PropertiesStore implements Store {
 	private Properties properties;
 	private Set<String> logged = new HashSet<>();
-	final Logger log = LoggerFactory.getLogger(PropertiesStore.class);
+	private Logger log = LoggerFactory.getLogger(PropertiesStore.class);
 
 	public PropertiesStore(String configFile) {
 		properties = new Properties();

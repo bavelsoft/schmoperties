@@ -35,7 +35,6 @@ public class OverridableProcessor extends AbstractProcessor {
 
 	@Override
 	public synchronized void init(ProcessingEnvironment env){
-System.err.println("running OverridableProcessor");
 		super.init(env);
 		messager = env.getMessager();
 		elementUtils = env.getElementUtils();
@@ -44,10 +43,18 @@ System.err.println("running OverridableProcessor");
 
 	@Override
 	public boolean process(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
+		try {
+			return processAndThrow(annotationsParam, env);
+		} catch (Exception e) {
+			System.err.println(e);
+			throw(e);
+		}
+	}
+
+	private boolean processAndThrow(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
 		Map<TypeElement, Collection<Element>> classes = new HashMap<>();
 		for (Element annotatedElement : env.getElementsAnnotatedWith(OverridableValue.class)) {
 			TypeElement cls = (TypeElement)annotatedElement.getEnclosingElement();
-System.err.println("processing "+cls);
 			if (!classes.containsKey(cls))
 				classes.put(cls, new ArrayList<>());
 			classes.get(cls).add(annotatedElement);

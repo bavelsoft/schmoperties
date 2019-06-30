@@ -30,7 +30,6 @@ import com.bavelsoft.schmoperties.generator.GuiceModuleGenerator;
 import com.bavelsoft.schmoperties.annotation.ConfigurationModule;
 import com.bavelsoft.schmoperties.annotation.Configured;
 
-
 @AutoService(Processor.class)
 public class ConfiguredProcessor extends AbstractProcessor {
         private static Map<String, Class<?>> typeMap = TypeMapFactory.createTypeMap();
@@ -51,6 +50,15 @@ public class ConfiguredProcessor extends AbstractProcessor {
 
 	@Override
 	public boolean process(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
+		try {
+			return processAndThrow(annotationsParam, env);
+		} catch (Exception e) {
+			System.err.println(e);
+			throw(e);
+		}
+	}
+
+	private boolean processAndThrow(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
 		Map<String, Class<?>> fields = getFields(env);
 		Set<String> optionalFields = getOptionalFields(env);
 		Set<? extends Element> elements = env.getElementsAnnotatedWith(ConfigurationModule.class);
@@ -64,16 +72,6 @@ public class ConfiguredProcessor extends AbstractProcessor {
 
 			String fileName = "target/generated-sources/annotations/"
 				+ (packageName + "." + configurationModule).replaceAll("\\.","/");
-			System.err.println("com.bavelsoft.schmoperties preparing to create module file "
-				+ fileName
-				+ ": "
-				+ new java.io.File(fileName).exists()
-				+ " "
-				+ env.getRootElements().isEmpty()
-				+ " "
-				+ env.processingOver()
-				+ " "
-				+ Thread.currentThread().getId());
 
 			if (element instanceof ExecutableElement || ((TypeElement)element).getSuperclass().toString().equals("com.google.inject.AbstractModule"))
 				guiceGenerator.write(packageName, configurationModule, fields, optionalFields);

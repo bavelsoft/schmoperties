@@ -61,24 +61,29 @@ public class ConfiguredProcessor extends AbstractProcessor {
 	private boolean processAndThrow(Set<? extends TypeElement> annotationsParam, RoundEnvironment env) {
 		Map<String, Class<?>> fields = getFields(env);
 		Set<String> optionalFields = getOptionalFields(env);
-		Set<? extends Element> elements = env.getElementsAnnotatedWith(ConfigurationModule.class);
-		if (!fields.isEmpty() && elements.isEmpty())
-			messager.printMessage(Diagnostic.Kind.WARNING,
-					      "need @ConfiguredModule in the same compilation unit, e.g. maven module",
-					      env.getElementsAnnotatedWith(Configured.class).iterator().next());
-		for (Element element : elements) {
-			String configurationModule = element.getAnnotation(ConfigurationModule.class).value();
-			String packageName = elementUtils.getPackageOf(element).toString();;
-
-			String fileName = "target/generated-sources/annotations/"
-				+ (packageName + "." + configurationModule).replaceAll("\\.","/");
-
-			if (element instanceof ExecutableElement || ((TypeElement)element).getSuperclass().toString().equals("com.google.inject.AbstractModule"))
-				guiceGenerator.write(packageName, configurationModule, fields, optionalFields);
-			else
-				daggerGenerator.write(packageName, configurationModule, fields, optionalFields);
-		}
+		Set<? extends Element> configurationModuleElements = env.getElementsAnnotatedWith(ConfigurationModule.class);
+		complainOfMissingConfigurationModule(env, fields.keySet(), configurationModuleElements);
+		complainOfInconsistentAnnotation(env, fields.keySet());
+		for (Element element : configurationModuleElements)
+			generateConfigurationModule(element, fields, optionalFields);
 		return false;
+	}
+
+	private void generateConfigurationModule(Element element, Map<String, Class<?>> fields, Set<String> optionalFields) {
+		String className = element.getAnnotation(ConfigurationModule.class).value();
+		String packageName = elementUtils.getPackageOf(element).toString();
+
+		//only guice employs a configure() method, i.e. ExecutableElement
+		if (element instanceof ExecutableElement || isGuiceModule(element))
+			guiceGenerator.write(packageName, className, fields, optionalFields);
+		else
+			daggerGenerator.write(packageName, className, fields, optionalFields);
+	}
+
+	private boolean isGuiceModule(Element element) {
+		if (!(element instanceof TypeElement))
+			return false;
+		return ((TypeElement)element).getSuperclass().toString().equals("com.google.inject.AbstractModule");
 	}
 
 	private Map<String, Class<?>> getFields(RoundEnvironment env) {
@@ -96,14 +101,31 @@ public class ConfiguredProcessor extends AbstractProcessor {
 
 	private Set<String> getOptionalFields(RoundEnvironment env) {
 		Set<String> fields = new HashSet<>();
-		for (Element element : env.getElementsAnnotatedWith(Configured.class)) {
-			for (AnnotationMirror mirror : element.getAnnotationMirrors()) {
-				if (mirror.getAnnotationType().asElement().getSimpleName().contentEquals("Nullable")) {
+		for (Element element : env.getElementsAnnotatedWith(Configured.class))
+			for (AnnotationMirror mirror : element.getAnnotationMirrors())
+				if (mirror.getAnnotationType().asElement().getSimpleName().contentEquals("Nullable"))
 					fields.add(element.getAnnotation(Named.class).value());
-				}
-			}
-		}
 		return fields;
+	}
+
+	private void complainOfMissingConfigurationModule(RoundEnvironment env,
+			Set<String> configured,
+			Set<? extends Element> configuredModules) {
+		if (!configured.isEmpty() && configuredModules.isEmpty())
+			messager.printMessage(Diagnostic.Kind.ERROR,
+			      "need @ConfiguredModule in the same compilation unit, e.g. maven module",
+			      env.getElementsAnnotatedWith(Configured.class).iterator().next());
+	}
+
+	private void complainOfInconsistentAnnotation(RoundEnvironment env, Set<String> configuredNames) {
+		for (Element element : env.getElementsAnnotatedWith(Named.class)) {
+			String name = element.getAnnotation(Named.class).value();
+			if (configuredNames.contains(name) && element.getAnnotation(Configured.class) == null)
+				messager.printMessage(Diagnostic.Kind.ERROR,
+					"`"+element.toString()+"' needs to be annotated @Configured,"+
+					" because @Named(\""+name+"\") is annotated @Configured elsewhere",
+					element);
+		}
 	}
 
 	@Override

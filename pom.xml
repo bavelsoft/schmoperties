@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.bavelsoft</groupId>
 	<artifactId>schmoperties</artifactId>
-	<version>1.0.17</version>
+	<version>1.0.25</version>
 	<build>
 		<plugins>
 			<plugin>

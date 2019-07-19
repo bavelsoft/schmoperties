@@ -19,6 +19,7 @@ public class MyGuiceTest {
 		@Inject @Configured @Named("${var}bar") String varBar;
 		@Inject @Configured @Named("Qux") int qux;
 		@Nullable @Inject @Configured @Named("Quux") Double quux;
+		@Inject @Configured @Named("Qux") int wee;
 
 		@Inject
 		WiredClass() {}

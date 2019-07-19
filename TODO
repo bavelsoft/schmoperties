@@ -1,4 +1,6 @@
+tests for when we want to fail the compilation
 debugging
 enums
 collections
+custom annotations instead of @Named
 hk2

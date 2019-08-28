@@ -19,7 +19,8 @@ public class TypesafeConfigStore implements Store {
 	private Logger log = LoggerFactory.getLogger(PropertiesStore.class);
 
 	public TypesafeConfigStore(String configFile) {
-		config = ConfigFactory.parseFile(new File(configFile)).resolve();
+		Config configFromConfigFile = ConfigFactory.parseFile(new File(configFile));
+		config = ConfigFactory.systemProperties().withFallback(configFromConfigFile).resolve();
 	}
 
 	public Collection<String> getKeys() {

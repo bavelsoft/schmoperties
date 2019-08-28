@@ -37,4 +37,12 @@ public class MyOverridableTest {
 	public void testIntOverride() {
 		assertEquals(456, frobField);
 	}
+
+	@OverridableValue("nope")
+	private final String systemPropertyMu = MyOverridableTestOverridableSupport.systemPropertyMu();
+
+	@Test
+	public void testSystemProperty() {
+		assertEquals("Bar", systemPropertyMu);
+	}
 }

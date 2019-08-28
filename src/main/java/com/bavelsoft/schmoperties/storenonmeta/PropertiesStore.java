@@ -20,6 +20,9 @@ public class PropertiesStore implements Store {
 
 	public PropertiesStore(String configFile) {
 		properties = new Properties();
+		Properties systemProperties = System.getProperties();
+		for (String name : systemProperties.stringPropertyNames())
+			properties.setProperty(name, systemProperties.getProperty(name));
 		try {
 			properties.load(new FileInputStream(configFile));
 		} catch (IOException e) {
